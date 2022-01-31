@@ -105,7 +105,6 @@
 								$('#error').html('<div class="alert alert-danger">'+data.message+'</div>');
 					            $('#signup').html("sign up");
 				              }else{
-								$('#signup_form')[0].reset();
 					            $('#error').html('<div class="alert alert-success">'+data.message+'</div>');
 								$('#signup').html("sign up");
 							  }
