@@ -14,5 +14,5 @@ http://task-php.herokuapp.com/login/data.php
 OR
 
 ``` 
-http://task-php.herokuapp.com/login/user_data.json
+curl http://task-php.herokuapp.com/login/user_data.json
 ```
