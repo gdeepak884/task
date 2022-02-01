@@ -9,6 +9,7 @@ if ($db->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+//Sign up
 $password = $confirm_password = "";
 if(isset($_POST['register'])){
   if(empty($_POST['name'])){
@@ -84,6 +85,7 @@ if(isset($_POST['register'])){
   echo json_encode($data);
 }
 
+//Login in
 if(isset($_POST['login'])){
   if(empty($_POST['username'])){
     $errors['username'] = "Username is required";
@@ -127,6 +129,7 @@ if(isset($_POST['login'])){
   echo json_encode($data);
 }
 
+//Update
 if(isset($_POST['update'])){
   if(empty($_POST['age'])){
     $errors['age'] = "Age is required";
@@ -174,6 +177,7 @@ if(isset($_POST['update'])){
   echo json_encode($data);
 }
 
+//Data
 if(isset($_POST['fetch']) && isset($_SESSION['user_id'])){
   $sql = "SELECT * FROM task WHERE id = ?";
   $stmt = $db->prepare($sql);
