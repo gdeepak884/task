@@ -29,7 +29,7 @@ $(document).ready(function(){
                   $('#signin').html("sign in");
                 }else{
                   $('#error').html('<div class="alert alert-success">'+data.message+'</div>');
-                  location.href = "../index.php";	
+                  location.href = "profile.html";	
                 }
               }
           });
@@ -86,8 +86,9 @@ $(document).ready(function(){
                 $('#error').html('<div class="alert alert-danger">'+data.message+'</div>');
                 $('#signup').html("sign up");
               }else{
-                $('#error').html('<div class="alert alert-success">'+data.message+'</div>');
+                $('#error').html('<div class="alert alert-success">'+data.message+'</br>'+'Redirecting to the login page...</div>');
                 $('#signup').html("sign up");
+                setTimeout(function(){location.href = 'index.html';}, 3000);
               }
             }
         });
@@ -95,9 +96,9 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  if (window.location.href.indexOf('/index.php') > 0) {
+  if (window.location.href.indexOf('login/profile.html') > 0) {
     $.ajax({
-          url: './login/app_logic.php',
+          url: 'app_logic.php',
           type: 'POST',
           data: {
               'fetch': 1
@@ -105,6 +106,7 @@ $(document).ready(function(){
           success: function(data){
               var data = JSON.parse(data);
               if(data.status == 'success'){
+                  $('#username').html(data.username);
                   $('#name').html(data.name);
                   $('#email').html(data.email);
                   if(data.age > 0){
@@ -112,9 +114,9 @@ $(document).ready(function(){
                   $('#dob').val(data.dob);
                   if(data.phone > 0){
                   $('#phone').val(data.phone);}
-              }
-              else{
-                $('#error').html('<div class="alert alert-danger">Error while retrieving data!</div>');
+              }else{
+                  $('#error').html('<div class="alert alert-danger">'+data.message+'</div>');
+                  setTimeout(function(){location.href = 'index.html';}, 3000);
               }
           }
       });
@@ -128,7 +130,7 @@ $(document).ready(function(){
       var dob = $('#dob').val();
       var phone = $('#phone').val();
       $.ajax({
-          url: './login/app_logic.php',
+          url: 'app_logic.php',
           type: 'POST',
           data: {
               'update': 1,
@@ -157,3 +159,4 @@ $(document).ready(function(){
           }
       });
   });
+  

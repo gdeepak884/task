@@ -178,26 +178,27 @@ if(isset($_POST['update'])){
 }
 
 //Data
-if(isset($_POST['fetch']) && isset($_SESSION['user_id'])){
+if(isset($_POST['fetch'])){
   $sql = "SELECT * FROM task WHERE id = ?";
   $stmt = $db->prepare($sql);
   $stmt->bind_param('s', $_SESSION['user_id']);
   $stmt->execute();
   $result = $stmt->get_result();
   if($result->num_rows > 0){
-    $data = array();
     while($row = $result->fetch_assoc()){
       $data['status'] = "success";
+      $data['username'] = $row['username'];
       $data['name'] = $row['name'];
       $data['email'] = $row['email'];
       $data['age'] = $row['age'];
       $data['dob'] = $row['dob'];
       $data['phone'] = $row['phone'];
     }
-    echo json_encode($data);
   }else{
-    $date="error";
-    echo json_encode($date);
+    $data['status'] = "error";
+    $data['errors'] = false;
+    $data['message'] = "Error while retrieving data!";
   }
+  echo json_encode($data);
 }
 ?>
