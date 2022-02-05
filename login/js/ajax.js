@@ -95,7 +95,7 @@ $(document).ready(function(){
 });
 
 $(document).ready(function(){
-  if (window.location.href.indexOf('task/index.php') > 0) {
+  if (window.location.href.indexOf('/index.php') > 0) {
     $.ajax({
           url: './login/app_logic.php',
           type: 'POST',
