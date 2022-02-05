@@ -147,7 +147,7 @@ if(isset($_POST['update'])){
   if (empty($errors)) {
   $sql="UPDATE task SET age = ?, dob = ?, phone = ? WHERE id = ?";
   $stmt = $db->prepare($sql);
-  $stmt->bind_param('isii', $age, $dob, $phone, $_SESSION['user_id']);
+  $stmt->bind_param('isis', $age, $dob, $phone, $_SESSION['user_id']);
    if($stmt->execute()){
       //Updating JSON data
       $current_data=file_get_contents('user_data.json');
@@ -181,7 +181,7 @@ if(isset($_POST['update'])){
 if(isset($_POST['fetch']) && isset($_SESSION['user_id'])){
   $sql = "SELECT * FROM task WHERE id = ?";
   $stmt = $db->prepare($sql);
-  $stmt->bind_param('i', $_SESSION['user_id']);
+  $stmt->bind_param('s', $_SESSION['user_id']);
   $stmt->execute();
   $result = $stmt->get_result();
   if($result->num_rows > 0){

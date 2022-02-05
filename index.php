@@ -1,6 +1,6 @@
 <?php session_start(); 
 if(!isset($_SESSION['user_id'])){
-  header('Location: ./login/index.php');
+  header('Location: ./login/index.html');
 }
 ?>
 <!doctype html>
@@ -65,69 +65,7 @@ if(!isset($_SESSION['user_id'])){
   <script src="./login/js/popper.js"></script>
   <script src="./login/js/bootstrap.min.js"></script>
   <script src="./login/js/main.js"></script>
-  <script>
-	  $(document).ready(function(){
-		$.ajax({
-			  url: './login/app_logic.php',
-			  type: 'POST',
-			  data: {
-				  'fetch': 1
-			  },
-			  success: function(data){
-				  var data = JSON.parse(data);
-				  if(data.status == 'success'){
-					  $('#name').html(data.name);
-					  $('#email').html(data.email);
-					  if(data.age > 0){
-					  $('#age').val(data.age);}
-					  $('#dob').val(data.dob);
-					  if(data.phone > 0){
-					  $('#phone').val(data.phone);}
-				  }
-				  else{
-					$('#error').html('<div class="alert alert-danger">Error while retrieving data!</div>');
-				  }
-			  }
-		  });
-	  });
-	    $('.submit').click(function(e){
-          $(".error-block").remove();
-		  $(".alert").remove();
-		  e.preventDefault();
-		  var age = $('#age').val();
-		  var dob = $('#dob').val();
-		  var phone = $('#phone').val();
-		  $.ajax({
-			  url: './login/app_logic.php',
-			  type: 'POST',
-			  data: {
-				  'update': 1,
-				  'age': age,
-				  'dob': dob,
-				  'phone': phone
-			  },
-			  beforeSend: function(){
-				  $('#update').html("updating...");
-			  },
-			  success: function(data){
-				  var data = JSON.parse(data);
-				  if(data.status != "success"){
-					  if(data.errors.age){
-                        $("#age-input").append('<div class="error-block" style="color:red;">'+data.errors.age+'</div>');
-					  }
-					  if(data.errors.phone){
-                        $("#phone-input").append('<div class="error-block" style="color:red;">'+data.errors.phone+'</div>');
-					  }
-					$('#error').html('<div class="alert alert-danger">'+data.message+'</div>');
-					$('#update').html("update");
-				  }else{
-					$('#update').html("update");
-					$('#error').html('<div class="alert alert-success">'+data.message+'</div>');
-				  }
-			  }
-		  });
-	  });
-  </script>  
+  <script src="./login/js/ajax.js"></script> 
 </body>
 </html>
 

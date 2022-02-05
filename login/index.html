@@ -4,13 +4,9 @@
   	<title>Login</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
 	<link rel="stylesheet" href="css/style.css">
-
 	</head>
 	<body class="img js-fullheight" style="background-color: black;">
 	<section class="ftco-section">
@@ -38,7 +34,7 @@
 	        </form>
 	          <p class="w-100 text-center">&mdash; New to this? &mdash;</p>
 	          <div class="social d-flex text-center">
-	          	<a href="signup.php" class="px-2 py-2 mr-md-1 rounded">Sign up</a>
+	          	<a href="signup.html" class="px-2 py-2 mr-md-1 rounded">Sign up</a>
 	          </div>
 		      </div>
 				</div>
@@ -50,45 +46,7 @@
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
-  <script>
-	  $(document).ready(function(){
-		$('.submit').click(function(e){
-			$(".error-block").remove();
-		    $(".alert").remove();
-	  		e.preventDefault();
-	  		var username = $('#username').val();
-	  		var password = $('#password').val();
-	  		$.ajax({	
-				url: "app_logic.php",
-				type: "POST",				
-	  			data:{
-				  'login': 1,
-				  'username': username,
-				  'password': password
-			    },
-				beforeSend: function(){
-				  	$('#signin').html("signing in...");
-				},
-				success: function(data){
-					var data = JSON.parse(data);
-				    if(data.status != "success"){
-					  if(data.errors.username){
-                        $("#username-input").append('<div class="error-block" style="color:red;">'+data.errors.username+'</div>');
-					  }
-					  if(data.errors.password){
-                        $("#password-input").append('<div class="error-block" style="color:red;">'+data.errors.password+'</div>');
-					  }
-					  $('#error').html('<div class="alert alert-danger">'+data.message+'</div>');
-					  $('#signin').html("sign in");
-				    }else{
-					  $('#error').html('<div class="alert alert-success">'+data.message+'</div>');
-					  location.href = "../index.php";	
-				    }
-	  			}
-	  		});
-	  	});
-	  });
-  </script>
-	</body>
+  <script src="js/ajax.js"></script>
+</body>
 </html>
 
